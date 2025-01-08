@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :roles, dependent: :destroy
+
   validates :email, presence: true, uniqueness: true
   # validates :password_digest, presence: true, uniqueness: true
   validates :last_name, presence: true
