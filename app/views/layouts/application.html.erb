@@ -26,6 +26,11 @@
 
 </head>
 <header>
+  <% if current_user %>
+    <%= link_to "Профиль", user_path(current_user.id)%>
+  <% else %>
+    <%= link_to "Профиль", login_path%>
+  <% end %>
   <%= link_to "Главная", root_path %>
   <%= link_to "Мероприятия", events_path %>
 </header>

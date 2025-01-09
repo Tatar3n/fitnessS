@@ -14,10 +14,4 @@
       <%= competition.ends_at.strftime("%d %B %Y %H:%M") %>
     </p>
   </div>
-  <% if current_user.athlete? %>
-    <%= button_to "Участвовать", competition_participate_path(competition), method: :post %>
-  <% end %>
-  <% if current_user.referee? %>
-    <%= button_to "Судить", competition_judge_path(@event.id, competition.id), method: :post %>
-  <% end %>
 </div>

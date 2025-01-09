@@ -1,6 +1,5 @@
 <div>
   <h1 class="font-bold text-4xl">Events#new</h1>
-  <p>Find me in app/views/events/new.html.erb</p>
   <%= form_with model: @event, url: events_path do |form| %>
     <div class="field">
       <%= form.label :title, "Название" %>
@@ -12,32 +11,32 @@
     </div>
     <div class="field">
       <%= form.label :starts_at, "Начало:" %>
-      <%= form.datetime_field :starts_at, include_seconds: false %>
+      <%= form.datetime_field :starts_at, include_seconds: false, required: true %>
     </div>
     <div class="field">
       <%= form.label :ends_at, "Конец:" %>
-      <%= form.datetime_field :ends_at, include_seconds: false %>
+      <%= form.datetime_field :ends_at, include_seconds: false, required: true %>
     </div>
     <h2>Соревнования:</h2>
     <div id="competitions">
       <%= form.fields_for :competitions do |competition_form| %>
-        <%= render 'competitions/competition', competition_form: competition_form %>
-        <!--        <div class="competition-fields">-->
-        <!--          <p>-->
-        <%#= competition_form.label :name, "Название:" %>
-        <%#= competition_form.text_field :name %>
-        <!--          </p>-->
-        <%#= competition_form.label :min_athlete_weight, "Минимальный вес атлета:" %>
-        <%#= competition_form.number_field :min_athlete_weight, in: 30..500, step:0.01 %>
-        <%#= competition_form.label :max_athlete_weight, "Максимальный вес атлета:" %>
-        <%#= competition_form.number_field :max_athlete_weight, min: 30..500, step:0.01 %>
-        <!--          <p>-->
-        <%#= competition_form.label :starts_at, "Начало:" %>
-        <%#= competition_form.datetime_field :starts_at %>
-        <%#= competition_form.label :ends_at, "Конец:" %>
-        <%#= competition_form.datetime_field :ends_at %>
-        <!--          </p>-->
-        <!--        </div>-->
+        <%#= render 'competitions/competition', competition_form: competition_form %>
+        <div class="competition-fields">
+          <p>
+            <%= competition_form.label :name, "Название:" %>
+            <%= competition_form.text_field :name, required: true %>
+          </p>
+          <%= competition_form.label :min_athlete_weight, "Минимальный вес атлета:" %>
+          <%= competition_form.number_field :min_athlete_weight, in: 30..500, step:0.01, required: true %>
+          <%= competition_form.label :max_athlete_weight, "Максимальный вес атлета:" %>
+          <%= competition_form.number_field :max_athlete_weight, min: 30..500, step:0.01, required: true %>
+          <p>
+            <%= competition_form.label :starts_at, "Начало:" %>
+            <%= competition_form.datetime_field :starts_at, required: true %>
+            <%= competition_form.label :ends_at, "Конец:" %>
+            <%= competition_form.datetime_field :ends_at, required: true %>
+          </p>
+        </div>
       <% end %>
     </div>
     <%= button_tag 'Добавить соревнование', id: 'add-competition' %>
@@ -46,7 +45,9 @@
       <%= form.submit "Создать событие" %>
     </div>
   <% end %>
+
 </div>
+
 <script>
     document.querySelector("form").addEventListener("submit", function(e) {
         console.log("Форма отправляется");
@@ -54,16 +55,20 @@
     document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("add-competition").addEventListener("click", function(e) {
             e.preventDefault();
+
             // Клонируем первое поле соревнования
             var newCompetition = document.querySelector("#competitions .competition-fields").cloneNode(true);
+
             // Очищаем значения полей
             newCompetition.querySelectorAll("input, textarea").forEach(input => {
                 input.value = "";
                 // Обновляем имя поля для правильной индексации
                 input.name = input.name.replace(/$$\d+$$/, "[" + (document.querySelectorAll("#competitions .competition-fields").length) + "]");
             });
+
             document.getElementById("competitions").appendChild(newCompetition);
         });
+
         // Удаление соревнования
         document.addEventListener("click", function(e) {
             if (e.target.classList.contains("remove-competition")) {

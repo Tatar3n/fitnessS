@@ -1,9 +1,12 @@
 class Event < ApplicationRecord
   has_many :competitions
   accepts_nested_attributes_for :competitions, allow_destroy: true
+
   validates :title, presence: true
+  validates :place, presence: true
   validates :starts_at, presence: true
   validates :ends_at, presence: true, comparison: { greater_than: :starts_at }
+
   def self.upcoming_events
     Event.where("starts_at > ?", DateTime.now).order("starts_at")
   end

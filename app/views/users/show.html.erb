@@ -3,15 +3,31 @@
   <p>
     <strong>Фамилия:</strong>
     <%= @user.first_name %>
+
     <strong>Имя:</strong>
     <%= @user.first_name %>
+
     <% if @user.middle_name.present? %>
       <strong>Отчество:</strong>
       <%= @user.middle_name %>
     <% end %>
   </p>
   <p>
+    <% if @user.athlete? %>
+      <strong>Участник:</strong>
+      <%= render partial: "competitions/show", collection: @user.competitions_as_athlete, as: :competition %>
+    <% end %>
+  </p>
+  <p>
+    <% if @user.referee? %>
+      <strong>Судья:</strong>
+      <%= render partial: "competitions/show", collection: @user.competitions_as_referee, as: :competition %>
+    <% end %>
+  </p>
+
+  <p>
     <strong>Email:</strong>
     <%= @user.email %>
   </p>
+  <%= button_to "Выйти", logout_path, method: :delete %>
 </div>

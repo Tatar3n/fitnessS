@@ -4,10 +4,12 @@ class EventsController < ApplicationController
     @upcoming_events = Event.upcoming_events
     @past_events = Event.past_events
   end
+
   def new
     @event = Event.new
     @event.competitions.build
   end
+
   def create
     @event = Event.new(event_params)
     if @event.save
@@ -16,15 +18,20 @@ class EventsController < ApplicationController
       render :new
     end
   end
+
   def show
     @event = Event.find(params[:id])
   end
+
   def edit
   end
+
   def update
   end
+
   def destroy
   end
+
   def event_params
     params.require(:event).permit(:title, :place, :starts_at, :ends_at,
                                   competitions_attributes: [ :id, :name,
