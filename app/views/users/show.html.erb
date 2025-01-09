@@ -1,0 +1,17 @@
+<h1>Страница текущего пользователя</h1>
+<div>
+  <p>
+    <strong>Фамилия:</strong>
+    <%= @user.first_name %>
+    <strong>Имя:</strong>
+    <%= @user.first_name %>
+    <% if @user.middle_name.present? %>
+      <strong>Отчество:</strong>
+      <%= @user.middle_name %>
+    <% end %>
+  </p>
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+</div>
