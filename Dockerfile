@@ -2,8 +2,8 @@
 # check=error=true
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-docker build -t kachki .
-docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name kachki kachki
+# \docker build -t kachki .
+# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name kachki kachki
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
@@ -37,10 +37,9 @@ RUN apt-get update -qq && \
 ARG NODE_VERSION=22.12.0
 ARG YARN_VERSION=latest
 ENV PATH=/usr/local/node/bin:$PATH
-RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
-    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
-    npm install -g yarn@$YARN_VERSION && \
-    rm -rf /tmp/node-build-master
+RUN apt-get update && \
+    apt-get install -y nodejs npm && \
+    npm install -g yarn
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -70,7 +69,7 @@ FROM base
 
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
-COPY --from=build /rails /rails
+COPY --from=build /app /app
 
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \
