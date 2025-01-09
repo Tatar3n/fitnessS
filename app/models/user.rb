@@ -2,7 +2,8 @@ class User < ApplicationRecord
   has_many :roles, dependent: :destroy
   has_many :competitions_users
   has_many :competitions, through: :competitions_users
-
+  has_many :results_as_referee, class_name: "User", foreign_key: :referee_id
+  has_many :results_as_athlete, class_name: "User", foreign_key: :athlete_id
   validates :email, presence: true, uniqueness: true
   # validates :password_digest, presence: true, uniqueness: true
   validates :last_name, presence: true
