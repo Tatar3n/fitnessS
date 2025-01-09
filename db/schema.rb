@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_24_193954) do
+ActiveRecord::Schema[ 8.0 ].define(version: 2024_12_24_193954) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -30,8 +30,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_24_193954) do
     t.integer "role", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["competition_id"], name: "index_competitions_users_on_competition_id"
-    t.index ["user_id"], name: "index_competitions_users_on_user_id"
+    t.index [ "competition_id" ], name: "index_competitions_users_on_competition_id"
+    t.index [ "user_id" ], name: "index_competitions_users_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -50,9 +50,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_24_193954) do
     t.float "scope"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["athlete_id"], name: "index_results_on_athlete_id"
-    t.index ["competition_id"], name: "index_results_on_competition_id"
-    t.index ["referee_id"], name: "index_results_on_referee_id"
+    t.index [ "athlete_id" ], name: "index_results_on_athlete_id"
+    t.index [ "competition_id" ], name: "index_results_on_competition_id"
+    t.index [ "referee_id" ], name: "index_results_on_referee_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -60,7 +60,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_24_193954) do
     t.integer "role_name", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_roles_on_user_id"
+    t.index [ "user_id" ], name: "index_roles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

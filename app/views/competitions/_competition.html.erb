@@ -1,0 +1,16 @@
+<%= form_with do |competition_form| %>
+  <div class="competition-fields">
+    <p>
+      <%= competition_form.label :name, "Название:" %>
+      <%= competition_form.text_field :name %>
+    </p>
+    <%= competition_form.label :min_athlete_weight, "Минимальный вес атлета:" %>
+    <%= competition_form.number_field :min_athlete_weight, in: 30..500, step:0.01 %>
+    <%= competition_form.label :max_athlete_weight, "Максимальный вес атлета:" %>
+    <%= competition_form.number_field :max_athlete_weight, min: 30..500, step:0.01 %>
+    <%= competition_form.label :starts_at, "Начало:" %>
+    <%= competition_form.datetime_field :starts_at %>
+    <%= competition_form.label :ends_at, "Конец:" %>
+    <%= competition_form.datetime_field :ends_at %>
+  </div>
+<% end %>
