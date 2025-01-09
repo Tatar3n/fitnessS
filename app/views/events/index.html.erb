@@ -1,0 +1,8 @@
+<h1>Мероприятия</h1>
+<%= button_to "Создать мероприятие", new_event_path, method: :get %>
+<h2>Текущие мероприятия</h2>
+<%= render partial: "events/event", collection: @current_events %>
+<h2>Предстоящие мероприятия</h2>
+<%= render partial: "events/event", collection: @upcoming_events %>
+<h2>Прошедшие мероприятия</h2>
+<%= render partial: "events/event", collection: @past_events %>

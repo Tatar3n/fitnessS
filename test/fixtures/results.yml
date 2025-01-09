@@ -3,9 +3,10 @@ one:
   athlete: one
   referee: one
   competition: one
-  scope: 1.5
+  score: 1.5
+
 two:
   athlete: two
   referee: two
   competition: two
-  scope: 1.5
+  score: 1.5

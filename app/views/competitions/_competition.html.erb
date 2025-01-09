@@ -1,0 +1,23 @@
+<div>
+  <h3><%= competition.name %></h3>
+  <div>
+    <p>
+      <strong>Минимальный вес:</strong>
+      <%= competition.min_athlete_weight %>
+      <strong>Максимальный вес:</strong>
+      <%= competition.max_athlete_weight %>
+    </p>
+    <p>
+      <strong>Начало в:</strong>
+      <%= competition.starts_at.strftime("%d %B %Y %H:%M") %>
+      <strong>Конец в:</strong>
+      <%= competition.ends_at.strftime("%d %B %Y %H:%M") %>
+    </p>
+  </div>
+  <% if current_user.athlete? %>
+    <%= button_to "Участвовать", competition_participate_path(competition), method: :post %>
+  <% end %>
+  <% if current_user.referee? %>
+    <%= button_to "Судить", competition_judge_path(@event.id, competition.id), method: :post %>
+  <% end %>
+</div>

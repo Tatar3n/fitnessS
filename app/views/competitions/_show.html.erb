@@ -1,0 +1,17 @@
+<div>
+  <h3><%= competition.name %></h3>
+  <div>
+    <p>
+      <strong>Минимальный вес:</strong>
+      <%= competition.min_athlete_weight %>
+      <strong>Максимальный вес:</strong>
+      <%= competition.max_athlete_weight %>
+    </p>
+    <p>
+      <strong>Начало в:</strong>
+      <%= competition.starts_at.strftime("%d %B %Y %H:%M") %>
+      <strong>Конец в:</strong>
+      <%= competition.ends_at.strftime("%d %B %Y %H:%M") %>
+    </p>
+  </div>
+</div>

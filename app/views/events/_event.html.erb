@@ -1,0 +1,12 @@
+<div>
+  <h3><%= event.title %></h3>
+  <div>
+    <%= event.place %>
+    <%= event.id %>
+    <strong>Начало в:</strong>
+    <%= event.starts_at.strftime("%d %B %Y %H:%M") %>
+    <strong>Конец в:</strong>
+    <%= event.ends_at.strftime("%d %B %Y %H:%M") %>
+    <%= button_to "Посмотреть соревнования", event_path(event.id), method: :get %>
+  </div>
+</div>
