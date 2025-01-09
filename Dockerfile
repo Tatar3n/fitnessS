@@ -2,6 +2,7 @@
 # check=error=true
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
+
 # \docker build -t kachki .
 # docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name kachki kachki
 
