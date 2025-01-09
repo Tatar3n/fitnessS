@@ -1,14 +1,19 @@
 <h1>Аутентификация</h1>
+
 <div>
   <%= form_for :user do |form| %>
+
+
     <div class="field">
       <%= form.label :email %>
       <%= form.email_field :email, required: true %>
     </div>
+
     <div class="field">
       <%= form.label :password, "Пароль" %>
       <%= form.password_field :password, required: true %>
     </div>
+
     <div class="actions">
       <%= submit_tag "Вход" %>
     </div>
@@ -20,3 +25,4 @@
     </span>
   </div>
 </div>
+
