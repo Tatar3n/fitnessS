@@ -1,4 +1,28 @@
 <div>
   <h1 class="font-bold text-4xl">Events#edit</h1>
-  <p>Find me in app/views/events/edit.html.erb</p>
 </div>
+<%= form_with model: @event do |form| %>
+  <div>
+    <%= form.label :title, "Название события" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :place, "Место проведения" %>
+    <%= form.text_field :place %>
+  </div>
+
+  <div>
+    <%= form.label :starts_at, "Дата начала" %>
+    <%= form.datetime_local_field :starts_at %>
+  </div>
+
+  <div>
+    <%= form.label :ends_at, "Дата окончания" %>
+    <%= form.datetime_local_field :ends_at %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

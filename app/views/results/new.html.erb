@@ -1,0 +1,41 @@
+<h1>Добавить результат</h1>
+
+<%= form_with(model: [@competition, @result], local: true) do |form| %>
+  <div>
+    <%= form.label :athlete_id, "Участник" %>
+    <%= form.select :athlete_id, @athletes.map { |athlete| [athlete.full_name, athlete.id] }, prompt: "Выберите участника" %>
+  </div>
+
+  <div>
+    <%= form.label :score, "Оценка" %>
+    <%= form.number_field :score, step: 0.1 %>
+  </div>
+
+  <% if flash[:notice] %>
+    <div class="notice">
+      <%= flash[:notice] %>
+    </div>
+  <% elsif flash[:bad_notice] %>
+    <div class="bad_notice">
+      <%= flash[:bad_notice] %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.submit "Сохранить", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<style>
+    .notice, .bad_notice {
+        color: green;
+        background-color: wheat;
+        border: 1px solid #f5c6cb;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .bad_notice {
+        color: red;
+    }
+</style>

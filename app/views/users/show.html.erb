@@ -1,4 +1,7 @@
 <h1>Страница текущего пользователя</h1>
+
+<%= link_to 'Редактировать профиль', edit_user_path(@user), class: 'btn btn-primary' %>
+
 <div>
   <p>
     <strong>Фамилия:</strong>
@@ -10,7 +13,12 @@
     <% if @user.middle_name.present? %>
       <strong>Отчество:</strong>
       <%= @user.middle_name %>
-  <% end %>
+    <% end %>
+
+    <% if @user.weight.present? %>
+      <strong>Вес:</strong>
+      <%= @user.weight %>
+    <% end %>
   </p>
   <p>
     <% if @user.athlete? %>
@@ -24,6 +32,37 @@
       <%= render partial: "competitions/show", collection: @user.competitions_as_referee, as: :competition %>
     <% end %>
   </p>
+
+  <p>
+    <strong>Результаты участника:</strong>
+    <% if @user.results_as_athlete.any? %>
+    <ul>
+      <% @user.results_as_athlete.each do |result| %>
+        <li>
+          <%= result.competition.name %>: <%= result.score %> (Судья: <%= result.referee.full_name %>)
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Нет результатов.</p>
+  <% end %>
+  </p>
+
+  <p>
+    <strong>Результаты как судьи:</strong>
+    <% if @user.results_as_referee.any? %>
+    <ul>
+      <% @user.results_as_referee.each do |result| %>
+        <li>
+          <%= result.competition.name %>: <%= result.score %> (Участник: <%= result.athlete.full_name %>)
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>Нет выставленных результатов.</p>
+  <% end %>
+  </p>
+
 
   <p>
     <strong>Email:</strong>

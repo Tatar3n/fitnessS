@@ -1,0 +1,50 @@
+<h1>Редактировать профиль</h1>
+
+
+
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <div class="errors">
+      <h2>Ошибки при редактировании:</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name, "Имя" %>
+    <%= f.text_field :first_name, required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name, "Фамилия" %>
+    <%= f.text_field :last_name, required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :middle_name, "Отчество" %>
+    <%= f.text_field :middle_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, "Электронная почта" %>
+    <%= f.email_field :email, required: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :birthday, "Дата рождения" %>
+    <%= f.date_field :birthday %>
+  </div>
+
+  <div class="field">
+    <%= f.label :weight, "Вес" %>
+    <%= f.number_field :weight, in: 30..500, step: 0.01 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Обновить информацию" %>
+  </div>
+<% end %>

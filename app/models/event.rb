@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-  has_many :competitions
+  has_many :competitions, inverse_of: :event
   accepts_nested_attributes_for :competitions, allow_destroy: true
 
   validates :title, presence: true

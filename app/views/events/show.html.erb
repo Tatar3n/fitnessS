@@ -1,5 +1,7 @@
 <div>
   <h1 class="font-bold text-4xl">Events#show</h1>
   <h2>Соревнования</h2>
+  <%= link_to 'Редактировать событие', edit_event_path(@event), class: 'btn btn-primary' %>
+
   <%= render partial: "competitions/competition", collection: @event.competitions %>
 </div>

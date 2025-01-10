@@ -24,18 +24,25 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @event = Event.find(params[:id])
   end
 
   def update
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      redirect_to @event, notice: "Событие успешно обновлено."
+    else
+      render :edit
+    end
   end
 
   def destroy
   end
 
   def event_params
-    params.require(:event).permit(:title, :place, :starts_at, :ends_at,
-                                  competitions_attributes: [ :id, :name,
-                                                             :min_athlete_weight, :max_athlete_weight,
-                                                             :starts_at, :ends_at ])
+    params.require(:event).permit(
+      :title, :place, :starts_at, :ends_at,
+      competitions_attributes: [ :id, :name, :min_athlete_weight, :max_athlete_weight, :starts_at, :ends_at, :_destroy ]
+    )
   end
 end

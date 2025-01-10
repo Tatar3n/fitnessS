@@ -1,4 +1,4 @@
-<div>
+<div style="background: gray; border: solid 1px black; margin: 5px 0 5px 0">
   <h3><%= competition.name %></h3>
   <div>
     <p>
@@ -14,4 +14,33 @@
       <%= competition.ends_at.strftime("%d %B %Y %H:%M") %>
     </p>
   </div>
+  <% if defined?(competition) && competition.present? %>
+    <h2>Результаты</h2>
+    <% if competition.results.any? %>
+      <table>
+        <thead>
+        <tr>
+          <th>Атлет</th>
+          <th>Оценка</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% competition.results.each do |result| %>
+          <tr>
+            <td><%= result.athlete.first_name %> <%= result.athlete.last_name %></td>
+            <td><%= result.score %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>Нет результатов</p>
+    <% end %>
+  <% else %>
+    <p>Соревнование не найдено</p>
+  <% end %>
+
+  <% if current_user.referee? %>
+    <%= link_to "Добавить результат", new_competition_result_path(competition), class: "btn btn-primary" %>
+  <% end %>
 </div>

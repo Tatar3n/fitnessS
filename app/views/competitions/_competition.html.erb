@@ -1,5 +1,6 @@
 <div>
   <h3><%= competition.name %></h3>
+  <%= link_to 'Редактировать соревнование', edit_competition_path(competition), class: 'btn btn-primary' %>
   <div>
     <p>
       <strong>Минимальный вес:</strong>
@@ -14,10 +15,36 @@
       <%= competition.ends_at.strftime("%d %B %Y %H:%M") %>
     </p>
   </div>
-  <% if current_user.athlete? %>
+
+  <% if flash[:alert] %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% elsif flash[:notice] %>
+    <div class="judge judge-danger">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <% if current_user && current_user.athlete? %>
     <%= button_to "Участвовать", competition_participate_path(competition), method: :post %>
   <% end %>
-  <% if current_user.referee? %>
+  <% if current_user && current_user.referee? %>
     <%= button_to "Судить", competition_judge_path(@event.id, competition.id), method: :post %>
   <% end %>
 </div>
+
+<style>
+    .alert-danger, .judge-danger {
+        color: red;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .judge-danger {
+        color: green;
+        background-color: wheat;
+    }
+</style>
